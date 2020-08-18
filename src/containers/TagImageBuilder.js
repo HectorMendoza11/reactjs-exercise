@@ -88,11 +88,13 @@ class TagImageBuilder extends Component {
         const addTag = LIST_TAGS.find(tag => tag.id == e.target.value);
         var newArray = this.state.imgTags;
         newArray.push(addTag);
+        var aux = {...this.state.image}
+        aux[0].tags = newArray;
         this.setState({
-            image: [...this.state.image, { "tags": newArray }],
+            image: aux,
             imgTags: newArray 
         });
-
+        
         //this.update(e.target.value, newArray);
     }
 
@@ -106,6 +108,12 @@ class TagImageBuilder extends Component {
         }
         this.setState({ 
             image: [...this.state.image, { "tags": newArray }], 
+            imgTags: newArray 
+        });
+        var aux = {...this.state.image}
+        aux[0].tags = newArray;
+        this.setState({
+            image: aux,
             imgTags: newArray 
         });
 
