@@ -45,17 +45,43 @@ class TagImageBuilder extends Component {
     
     // getting the information from the endpoint
     // componentWillMount() {
-    //     fetch('http://GET /tag').then((response) => {
+    //     fetch('http://tag').then((response) => {
     //         return response.json()
     //       }).then((res) => {
     //         this.setState({ tags: res })
     //       })
 
-    //     fetch('http://GET /image').then((response) => {
+    //     fetch('http://image').then((response) => {
     //         return response.json()
     //       }).then((res) => {
     //         this.setState({ images: res })
     //       })
+    // }
+
+    // update(id, data) {
+    //     // update entity - PUT
+    //     fetch('https://mural/:id/tag/' + id, {
+    //         method: 'PATCH',
+    //         body: JSON.stringify({
+    //          data
+    //         })
+    //       })
+    //         .then(res => res.json())
+    //         .then(res => console.log(res))
+    //         .catch(err => {
+    //             console.error(err)
+    //         })
+    // }
+    // delete(id) {
+    //     // delete entity - DELETE
+    //     fetch('https://mural/:id/tag/' + id, {
+    //             method: 'DELETE',
+    //         })
+    //         .then(res => res.json()) // or res.text()
+    //         .then(res => console.log(res))
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
     // }
 
     addTagHandler = ( e ) => {
@@ -66,6 +92,8 @@ class TagImageBuilder extends Component {
             image: [...this.state.image, { "tags": newArray }],
             imgTags: newArray 
         });
+
+        //this.update(e.target.value, newArray);
     }
 
     removeTagHandler = (idx) => {
@@ -80,6 +108,8 @@ class TagImageBuilder extends Component {
             image: [...this.state.image, { "tags": newArray }], 
             imgTags: newArray 
         });
+
+        //this.delete(idx);
     }
 
     render () { 
