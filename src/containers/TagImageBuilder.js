@@ -75,7 +75,9 @@ class TagImageBuilder extends Component {
     // }
 
     addTagHandler = ( e ) => {
-        if(e.event.value !== "0"){
+        if(e.target.value == 0){
+            return;
+        }else{
             const addTag = LIST_TAGS.find(tag => tag.id == e.target.value);
             var newArray = this.state.imgTags;
             newArray.push(addTag);
@@ -86,7 +88,7 @@ class TagImageBuilder extends Component {
                 imgTags: newArray 
             });
         }
-        
+
         //this.update(e.target.value, newArray);
     }
 

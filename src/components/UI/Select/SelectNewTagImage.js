@@ -13,7 +13,7 @@ const selectNewTagImage = (props) => {
     }, this);
     return (
         <select className={classes.Select} defaultValue="Select" onChange={props.addHandler}>
-            <option value="0">Select</option>
+            <option value="0" key="0">Select</option>
             {listOptTags}
         </select>
     );
