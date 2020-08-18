@@ -1,0 +1,12 @@
+.Image {
+    background-color: white;
+    padding: 8px;
+    height: 80%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.Image img {
+    height: auto;
+    width: 500px;
+}

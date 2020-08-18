@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import ListTagsImage from '../components/ListTagsImage';
+import SelectNewTagImage from '../components/SelectNewTagImage';
+import Image from '../components/Image/Image';
+
 const LIST_TAGS = [
     {"id":1,"label":"Abstract"},
     {"id":2,"label":"Typography"},
@@ -106,10 +110,6 @@ class TagImageBuilder extends Component {
         } else {
             newArray = this.state.imgTags.filter(item => item.id !== idx)
         }
-        this.setState({ 
-            image: [...this.state.image, { "tags": newArray }], 
-            imgTags: newArray 
-        });
         var aux = {...this.state.image}
         aux[0].tags = newArray;
         this.setState({
@@ -121,35 +121,11 @@ class TagImageBuilder extends Component {
     }
 
     render () { 
-        let numTags = this.state.imgTags;
-        const listOptTags = LIST_TAGS.map(function(el){
-            return (
-                <option 
-                    key={el.id} 
-                    value={el.id} 
-                    disabled={numTags.find( tag => tag.id === el.id ) ? true : false} >{el.label}</option>
-            );
-        }, this);
-
-        var listImgTags = [];
-        if(numTags.length <= 0) {
-            listImgTags = [{ id: 0, label: 'No Items tagged' }].map(function(el){
-                return (<li key={el.id}>{el.label}</li>);
-            }, this);
-        } else {
-            listImgTags = numTags.map(function(el){
-                return (<li key={el.id}>{el.label}<button onClick={() => this.removeTagHandler(el.id)}>X</button></li>);
-            }, this);
-        }
-
         return (
             <div>
-                <img width="400" src={this.state.image[0].imageUrl} alt={this.state.image[0].title} />
-                <select defaultValue="Select" onChange={this.addTagHandler}>
-                    <option>Select</option>
-                    {listOptTags}
-                </select>
-                <ul>{listImgTags}</ul>
+                <Image source={this.state.image[0].imageUrl} titleImg={this.state.image[0].title} />
+                <SelectNewTagImage listTags={LIST_TAGS} numTags={this.state.imgTags} addHandler={this.addTagHandler} />
+                <ListTagsImage numTags={this.state.imgTags} removeHandler={this.removeTagHandler} />
             </div>
         );
     }
