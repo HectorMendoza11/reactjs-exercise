@@ -66,46 +66,43 @@ class TagImageBuilder extends Component {
             image: [...this.state.image, { "tags": newArray }],
             imgTags: newArray 
         });
-        console.log(this.state);
     }
 
     removeTagHandler = (idx) => {
         let count = this.state.imgTags.length - 1;
-        console.log(count);
         var newArray;
         if ( count <= 0 ) {
-            newArray = "";
+            newArray = [];
         } else {
-            newArray = this.state.image[0].tags.filter(item => item.id !== idx)
+            newArray = this.state.imgTags.filter(item => item.id !== idx)
         }
         this.setState({ 
             image: [...this.state.image, { "tags": newArray }], 
-            imgTags: newArray });
+            imgTags: newArray 
+        });
     }
-    
 
     render () { 
         let numTags = this.state.imgTags;
+        const listOptTags = LIST_TAGS.map(function(el){
+            return (
+                <option 
+                    key={el.id} 
+                    value={el.id} 
+                    disabled={numTags.find( tag => tag.id === el.id ) ? true : false} >{el.label}</option>
+            );
+        }, this);
+
         var listImgTags = [];
         if(numTags.length <= 0) {
             listImgTags = [{ id: 0, label: 'No Items tagged' }].map(function(el){
-                return (
-                    <li key={el.id}>{el.label}</li>
-                );
+                return (<li key={el.id}>{el.label}</li>);
             }, this);
         } else {
             listImgTags = numTags.map(function(el){
-                return (
-                    <li key={el.id}>{el.label}<button onClick={() => this.removeTagHandler(el.id)}>X</button></li>
-                );
+                return (<li key={el.id}>{el.label}<button onClick={() => this.removeTagHandler(el.id)}>X</button></li>);
             }, this);
         }
-
-        const listOptTags = LIST_TAGS.map(function(el){
-            return (
-                <option key={el.id} value={el.id}>{el.label}</option>
-            );
-        }, this);
 
         return (
             <div>
