@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import ListTagsImage from '../components/ListTagsImage';
-import SelectNewTagImage from '../components/SelectNewTagImage';
+import ListTagsImage from '../components/UI/List/ListTagsImage';
+import SelectNewTagImage from '../components/UI/Select/SelectNewTagImage';
 import Image from '../components/Image/Image';
 
 const LIST_TAGS = [
@@ -29,21 +29,7 @@ const LIST_IMGS = [
 
 class TagImageBuilder extends Component {
     state = {
-        image: [
-            { "tags": 
-                [
-                    {"id": 5, "label": "Realism"}, 
-                    {"id": 1, "label": "Abstract"} 
-                ],
-              "createdAt": 1568044681586, 
-              "updatedAt": 1568044681586, 
-              "id": 6788, 
-              "title": "mural4",
-              //"imageUrl": "https://signned.url.com", 
-              "imageUrl": "https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-goose.jpg",
-              "thumbnailUrl": "https://signned.url.com"
-            }
-        ],
+        image: LIST_IMGS,
         imgTags: LIST_IMGS[0].tags
     }
     
@@ -89,15 +75,17 @@ class TagImageBuilder extends Component {
     // }
 
     addTagHandler = ( e ) => {
-        const addTag = LIST_TAGS.find(tag => tag.id == e.target.value);
-        var newArray = this.state.imgTags;
-        newArray.push(addTag);
-        var aux = {...this.state.image}
-        aux[0].tags = newArray;
-        this.setState({
-            image: aux,
-            imgTags: newArray 
-        });
+        if(e.event.value !== "0"){
+            const addTag = LIST_TAGS.find(tag => tag.id == e.target.value);
+            var newArray = this.state.imgTags;
+            newArray.push(addTag);
+            var aux = {...this.state.image}
+            aux[0].tags = newArray;
+            this.setState({
+                image: aux,
+                imgTags: newArray 
+            });
+        }
         
         //this.update(e.target.value, newArray);
     }

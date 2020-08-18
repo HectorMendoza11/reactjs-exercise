@@ -1,5 +1,7 @@
 import React from 'react'
 
+import classes from './SelectNewTagImage.css'
+
 const selectNewTagImage = (props) => {
     const listOptTags = props.listTags.map(function(el){
         return (
@@ -10,8 +12,8 @@ const selectNewTagImage = (props) => {
         );
     }, this);
     return (
-        <select defaultValue="Select" onChange={props.addHandler}>
-            <option>Select</option>
+        <select className={classes.Select} defaultValue="Select" onChange={props.addHandler}>
+            <option value="0">Select</option>
             {listOptTags}
         </select>
     );
